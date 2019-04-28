@@ -1,41 +1,47 @@
-# .goreleaser.yml
-# Build customization
+before:
+  hooks:
+    - go mod download
 builds:
-  - main: main.go
-    binary: git-profile
-    ldflags: -s -w -X main.Version={{.Version}} -X main.CommitHash={{.Commit}} -X main.CompileDate={{.Date}}
-    env:
-      - CGO_ENABLED=0
-    goos:
-      - linux
-      - darwin
-    goarch:
-      - 386
-      - amd64
-# Archive customization
-archive:
-  name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-  format: tar.gz
+- env:
+  - CGO_ENABLED=0
+  ldflags: -s -w -X main.Version={{.Version}} -X main.CommitHash={{.Commit}} -X main.CompileDate={{.Date}}
+  goarch:
+    - amd64
+  goos:
+    - darwin
+    - linux
+    - windows
+
+archives:
+- replacements:
+    darwin: MacOS
+    linux: Linux
+    windows: Windows
+    amd64: x86_64
   format_overrides:
     - goos: windows
       format: zip
-  replacements:
-    386: i386
-    amd64: x86_64
-    darwin: macos
-  files:
-    - LICENSE*
-    - README*
-# Homebrew customization
+checksum:
+  name_template: 'checksums.txt'
+  algorithm: sha256
+
 brew:
+  name: "git-profile-manager"
   github:
-    owner: dotzero
+    owner: dm3ch
     name: homebrew-tap
   commit_author:
-    name: dotzero
-    email: mail@dotzero.ru
+    name: dm3ch-ci
+    email: dm3ch+ci@dm3ch.net
   folder: Formula
-  homepage: https://github.com/dotzero/git-profile
-  description: Allows to add and switch between multiple user profiles in your git repositories
+  caveats: "git-profile-manager --help"
+  homepage: "https://github.com/Dm3Ch/git-profile-manager"
+  description: "Allows to add and switch between multiple user profiles in your git repositories"
+  custom_block: |
+    head "https://github.com/Dm3Ch/git-profile-manager.git"
+  dependencies:
+    - git
   test: |
-    system "#{bin}/git-profile version"
+    system "#{bin}/git-profile-manager --version"
+  install: |
+    bin.install "git-profile-manager"
