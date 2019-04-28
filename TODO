@@ -1,0 +1,7 @@
+1) Add support of working with global config
+2) Add support of working with system config
+3) Add ability to specify dir prefixes in config to use `use` command without specifying profile or add git command wrapper
+
+BackLog:
+1) Move from git binary calls to git2go or go-git library
+2) Move to logrus
