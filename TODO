@@ -13,3 +13,7 @@ BackLog:
 5) Add tests
 6) Move to logrus
 7) Support PGP keys in profiles
+8) Installation instructions
+9) OS X package
+10) Linux package
+11) Windows package
