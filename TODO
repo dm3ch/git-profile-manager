@@ -3,6 +3,7 @@
 3) Add ability to specify dir prefixes in config to use `use` command without specifying profile or add git command wrapper
 
 BackLog:
+0) Add as git subcommand
 1) SetUp CI
 2) Write homebrew formula
 3) Change LICENSE
