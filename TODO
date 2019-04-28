@@ -3,6 +3,7 @@
 3) Add ability to specify dir prefixes in config to use `use` command without specifying profile or add git command wrapper
 4) Shell completion
 5) ZSH enter prompt view info
+6) Git config location configuration via config file not command option
 
 BackLog:
 0) Add as git subcommand
