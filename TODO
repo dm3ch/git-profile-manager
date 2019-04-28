@@ -10,3 +10,4 @@ BackLog:
 4) Move from git binary calls to git2go or go-git library
 5) Add tests
 6) Move to logrus
+7) Support PGP keys in profiles
