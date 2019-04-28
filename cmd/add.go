@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/dotzero/git-profile/config"
+	"github.com/dm3ch/git-profile-manager/config"
 	"github.com/spf13/cobra"
 )
 

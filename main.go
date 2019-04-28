@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/dotzero/git-profile/cmd"
+	"github.com/dm3ch/git-profile-manager/cmd"
 )
 
 var (

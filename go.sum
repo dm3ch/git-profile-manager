@@ -1,0 +1,14 @@
+github.com/dm3ch/git-profile-manager v1.2.0 h1:tEHCZFJrEy74a79E6Tcore1lNSzfBFLkCEAez1TaPDU=
+github.com/dm3ch/git-profile-manager v1.2.0/go.mod h1:z0emUdaXOS8zfpm75gL6Bdel+6raqNkcv11oy7vf7us=
+github.com/dotzero/git-profile v1.2.0 h1:T8Q0MkC8dqwD4DmiGwNV5fOeOkt8DoMOVFJs5g3R7eY=
+github.com/dotzero/git-profile v1.2.0/go.mod h1:KdjAST7SeCoC8sRYFQKBbyNo/RvFw5ybnHfDzT5v8II=
+github.com/hashicorp/logutils v0.0.0-20150609070431-0dc08b1671f3 h1:oD64EFjELI9RY9yoWlfua58r+etdnoIC871z+rr6lkA=
+github.com/hashicorp/logutils v0.0.0-20150609070431-0dc08b1671f3/go.mod h1:QIAnNjmIWmVIIkWDTG1z5v++HQmx9WQRO+LraFDTW64=
+github.com/inconshreveable/mousetrap v1.0.0 h1:Z8tu5sraLXCXIcARxBp/8cbvlwVa7Z1NHg9XEKhtSvM=
+github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
+github.com/mitchellh/go-homedir v0.0.0-20161203194507-b8bc1bf76747 h1:eQox4Rh4ewJF+mqYPxCkmBAirRnPaHEB26UkNuPyjlk=
+github.com/mitchellh/go-homedir v0.0.0-20161203194507-b8bc1bf76747/go.mod h1:SfyaCUpYCn1Vlf4IUYiD9fPX4A5wJrkLzIz1N1q0pr0=
+github.com/spf13/cobra v0.0.1 h1:zZh3X5aZbdnoj+4XkaBxKfhO4ot82icYdhhREIAXIj8=
+github.com/spf13/cobra v0.0.1/go.mod h1:1l0Ry5zgKvJasoi3XT1TypsSe7PqH0Sj9dhYf7v3XqQ=
+github.com/spf13/pflag v1.0.0 h1:oaPbdDe/x0UncahuwiPxW1GYJyilRAdsPnq3e1yaPcI=
+github.com/spf13/pflag v1.0.0/go.mod h1:DYY7MBk1bdzusC3SYhjObp+wFpr4gzcvqqNjLnInEg4=
