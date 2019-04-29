@@ -36,12 +36,10 @@ brew:
   folder: Formula
   caveats: "git-profile-manager --help"
   homepage: "https://github.com/Dm3Ch/git-profile-manager"
-  description: "Allows to add and switch between multiple user profiles in your git repositories"
+  description: "Allows to manage and switch between multiple git profiles"
   custom_block: |
     head "https://github.com/Dm3Ch/git-profile-manager.git"
-  dependencies:
-    - git
   test: |
-    system "#{bin}/git-profile-manager --version"
+    system "#{bin}/git-profile-manager", "--version"
   install: |
     bin.install "git-profile-manager"
