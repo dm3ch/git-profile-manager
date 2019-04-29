@@ -1,7 +1,7 @@
 # Git Profile switcher
 
-[![Build Status](https://travis-ci.org/dotzero/git-profile.svg?branch=master)](https://travis-ci.org/dotzero/git-profile)
-[![Go Report Card](https://goreportcard.com/badge/github.com/dotzero/git-profile)](https://goreportcard.com/report/github.com/dotzero/git-profile)
+[![CircleCI](https://circleci.com/gh/Dm3Ch/git-profile-manager.svg?style=svg)](https://circleci.com/gh/Dm3Ch/git-profile-manager)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Dm3Ch/git-profile)](https://goreportcard.com/report/github.com/Dm3Ch/git-profile-manager)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dotzero/git-profile/blob/master/LICENSE)
 
 Git Profile allows to add and switch between multiple user profiles in your git repositories.
@@ -11,7 +11,7 @@ Git Profile allows to add and switch between multiple user profiles in your git 
 If you are OSX user, you can use [Homebrew](http://brew.sh/):
 
 ```bash
-brew install dotzero/tap/git-profile
+brew install dm3ch/tap/git-profile-manager
 ```
 
 ### Prebuilt binaries
@@ -22,10 +22,10 @@ Download the binary from the [releases](https://github.com/dotzero/git-profile/r
 
 If your operating system does not have a binary release, but does run Go, you can build from source.
 
-Make sure that you have Go version 1.7 or greater and that your `GOPATH` env variable is set (I recommand setting it to `~/go` if you don't have one).
+Make sure that you have Go version 1.11 or greater and that your `GOPATH` env variable is set (I recommend setting it to `~/go` if you don't have one).
 
 ```bash
-go get -u github.com/dotzero/git-profile
+go get -u github.com/dm3ch/git-profile-manager
 ```
 
 The binary will then be installed to `$GOPATH/bin` (or your `$GOBIN`).
