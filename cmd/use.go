@@ -37,10 +37,16 @@ func useRun(cmd *cobra.Command, args []string) {
 	}
 
 	for _, entry := range entries {
-		git.SetLocalConfig(entry.Key, entry.Value)
+		if err := git.SetLocalConfig(entry.Key, entry.Value); err != nil {
+			cmd.Println("Can't set config option")
+			cmd.Println(err.Error())
+		}
 	}
 
-	git.SetLocalConfig(`current-profile.name`, profile)
+	if err := git.SetLocalConfig(`current-profile.name`, profile); err != nil {
+		cmd.Println("Can't set config option")
+		cmd.Println(err.Error())
+	}
 
 	cmd.Printf("Successfully applied `%s` profile to current git repository.", profile)
 }
