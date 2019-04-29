@@ -4,7 +4,7 @@ before:
 builds:
 - env:
   - CGO_ENABLED=0
-  ldflags: -s -w -X main.Version={{.Version}} -X main.CommitHash={{.Commit}} -X main.CompileDate={{.Date}}
+  ldflags: -s -w -X github.com/dm3ch/git-profile-manager/version.VersionNumber={{.Version}} -X github.com/dm3ch/git-profile-manager/version.VersionCommitHash={{.Commit}} -X github.com/dm3ch/git-profile-manager/version.VersionBuildDate={{.Date}}
   goarch:
     - amd64
   goos:

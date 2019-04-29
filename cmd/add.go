@@ -20,10 +20,6 @@ var addCmd = &cobra.Command{
 	Run:  addRun,
 }
 
-func init() {
-	rootCmd.AddCommand(addCmd)
-}
-
 func addRun(cmd *cobra.Command, args []string) {
 	profile := args[0]
 	key := args[1]

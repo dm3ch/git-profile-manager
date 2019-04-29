@@ -14,10 +14,6 @@ var listCmd = &cobra.Command{
 	Run:     listRun,
 }
 
-func init() {
-	rootCmd.AddCommand(listCmd)
-}
-
 func listRun(cmd *cobra.Command, args []string) {
 	if len(cfgStorage.Profiles) == 0 {
 		cmd.Print(`There are no available profiles.

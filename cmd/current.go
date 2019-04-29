@@ -18,10 +18,6 @@ var currentCmd = &cobra.Command{
 	Run:     currentRun,
 }
 
-func init() {
-	rootCmd.AddCommand(currentCmd)
-}
-
 func currentRun(cmd *cobra.Command, args []string) {
 	if len(cfgStorage.Profiles) == 0 || !git.IsRepository() {
 		os.Exit(1)

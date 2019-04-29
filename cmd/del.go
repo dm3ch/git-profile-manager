@@ -18,10 +18,6 @@ Provide a "key" argument to remove only one key from a profile.`,
 	Run:  delRun,
 }
 
-func init() {
-	rootCmd.AddCommand(delCmd)
-}
-
 func delRun(cmd *cobra.Command, args []string) {
 	profile := args[0]
 

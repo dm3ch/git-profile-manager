@@ -17,10 +17,6 @@ var useCmd = &cobra.Command{
 	Run:     useRun,
 }
 
-func init() {
-	rootCmd.AddCommand(useCmd)
-}
-
 func useRun(cmd *cobra.Command, args []string) {
 	if !git.IsRepository() {
 		cmd.Println("Current directory is not a root of git repository.")

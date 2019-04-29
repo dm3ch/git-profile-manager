@@ -11,14 +11,6 @@ import (
 )
 
 var (
-	// Version is the version number or commit hash
-	// These variables should be set by the linker when compiling
-	Version = "0.0.0-unknown"
-	// CommitHash is the git hash of last commit
-	CommitHash = "Unknown"
-	// CompileDate is the date of build
-	CompileDate = "Unknown"
-
 	cfgStorage *config.Config
 	cfgFile    string
 	isDebug    bool
@@ -35,6 +27,13 @@ func init() {
 	cobra.OnInitialize(initLogs, initConfig)
 	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "~/.gitprofile", "config file")
 	rootCmd.PersistentFlags().BoolVarP(&isDebug, "debug", "d", false, "show debug log")
+
+	rootCmd.AddCommand(addCmd)
+	rootCmd.AddCommand(currentCmd)
+	rootCmd.AddCommand(listCmd)
+	rootCmd.AddCommand(delCmd)
+	rootCmd.AddCommand(useCmd)
+	rootCmd.AddCommand(versionCmd)
 }
 
 // Execute executes the root command.
