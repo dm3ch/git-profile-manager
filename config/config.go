@@ -83,11 +83,8 @@ func (c *Config) Save(filename string) (err error) {
 	}
 
 	err = c.writeFile(filename, body)
-	if err != nil {
-		return err
-	}
 
-	return nil
+	return err
 }
 
 // Load profiles from json file
