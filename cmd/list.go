@@ -6,16 +6,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var listCmd = &cobra.Command{
+var listCmd = &cobra.Command{ //nolint:gochecknoglobals
 	Use:     "list",
 	Aliases: []string{"l"},
 	Short:   "List of profiles",
 	Long:    "Displays a list of available profiles.",
 	Run:     listRun,
-}
-
-func init() {
-	rootCmd.AddCommand(listCmd)
 }
 
 func listRun(cmd *cobra.Command, args []string) {

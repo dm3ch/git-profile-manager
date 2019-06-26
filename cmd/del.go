@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var delCmd = &cobra.Command{
+var delCmd = &cobra.Command{ //nolint:gochecknoglobals
 	Use:     "del [profile] [key]",
 	Aliases: []string{"rm"},
 	Short:   "Delete an entry or a profile",
@@ -16,10 +16,6 @@ Provide a "key" argument to remove only one key from a profile.`,
   git-profile del my-profile user.name -> to delete only user.name`,
 	Args: cobra.RangeArgs(1, 2),
 	Run:  delRun,
-}
-
-func init() {
-	rootCmd.AddCommand(delCmd)
 }
 
 func delRun(cmd *cobra.Command, args []string) {

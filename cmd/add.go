@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var addCmd = &cobra.Command{
+var addCmd = &cobra.Command{ //nolint:gochecknoglobals
 	Use:     "add [profile] [key] [value]",
 	Aliases: []string{"set"},
 	Short:   "Add an entry to a profile",
@@ -18,10 +18,6 @@ var addCmd = &cobra.Command{
   git-profile add my-profile user.signingkey AAAAAAAA`,
 	Args: cobra.ExactArgs(3),
 	Run:  addRun,
-}
-
-func init() {
-	rootCmd.AddCommand(addCmd)
 }
 
 func addRun(cmd *cobra.Command, args []string) {

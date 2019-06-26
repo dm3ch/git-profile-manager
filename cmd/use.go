@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var useCmd = &cobra.Command{
+var useCmd = &cobra.Command{ //nolint:gochecknoglobals
 	Use:     "use [profile]",
 	Aliases: []string{"u"},
 	Short:   "Use a profile",
@@ -15,10 +15,6 @@ var useCmd = &cobra.Command{
 	Example: "  git-profile use my-profile",
 	Args:    cobra.ExactArgs(1),
 	Run:     useRun,
-}
-
-func init() {
-	rootCmd.AddCommand(useCmd)
 }
 
 func useRun(cmd *cobra.Command, args []string) {
