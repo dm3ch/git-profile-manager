@@ -25,8 +25,8 @@ checksum:
   name_template: 'checksums.txt'
   algorithm: sha256
 
-brew:
-  name: "git-profile-manager"
+brews:
+- name: "git-profile-manager"
   github:
     owner: dm3ch
     name: homebrew-tap
@@ -39,6 +39,8 @@ brew:
   description: "Allows to manage and switch between multiple git profiles"
   custom_block: |
     head "https://github.com/Dm3Ch/git-profile-manager.git"
+  dependencies:
+    - git
   test: |
     system "#{bin}/git-profile-manager", "--version"
   install: |
