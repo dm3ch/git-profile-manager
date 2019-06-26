@@ -13,7 +13,7 @@ func IsRepository() bool {
 }
 
 // SetLocalConfig set git local config key with value
-func SetLocalConfig(key string, value string) error {
+func SetLocalConfig(key, value string) error {
 	log.Printf("[DEBUG] git config --local %s \"%s\"\n", key, value)
 	err := exec.Command("git", "config", "--local", key, value).Run()
 	return err

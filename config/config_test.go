@@ -9,10 +9,10 @@ import (
 )
 
 // assert fails the test if the condition is false.
-func assert(tb testing.TB, condition bool, msg string, v ...interface{}) {
+func assert(tb testing.TB, condition bool, msg string) {
 	if !condition {
 		_, file, line, _ := runtime.Caller(1)
-		fmt.Printf("\033[31m%s:%d: "+msg+"\033[39m\n\n", append([]interface{}{filepath.Base(file), line}, v...)...)
+		fmt.Printf("\033[31m%s:%d: "+msg+"\033[39m\n\n", filepath.Base(file), line)
 		tb.FailNow()
 	}
 }

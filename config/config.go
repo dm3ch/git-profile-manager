@@ -52,7 +52,7 @@ func (c *Config) SetValue(profile string, entry Entry) bool {
 }
 
 // RemoveValue removes an entry from profile
-func (c *Config) RemoveValue(profile string, value string) bool {
+func (c *Config) RemoveValue(profile, value string) bool {
 	log.Println("[DEBUG] RemoveValue", profile, value)
 	if _, ok := c.Profiles[profile]; !ok {
 		return false
