@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var useCmd = &cobra.Command{
+var useCmd = &cobra.Command{ //nolint:gochecknoglobals
 	Use:     "use [profile]",
 	Aliases: []string{"u"},
 	Short:   "Use a profile",

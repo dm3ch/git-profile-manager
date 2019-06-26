@@ -11,11 +11,11 @@ import (
 )
 
 var (
-	cfgStorage *config.Config
-	cfgFile    string
-	isDebug    bool
+	cfgStorage *config.Config //nolint:gochecknoglobals
+	cfgFile    string         //nolint:gochecknoglobals
+	isDebug    bool           //nolint:gochecknoglobals
 
-	rootCmd = &cobra.Command{
+	rootCmd = &cobra.Command{ //nolint:gochecknoglobals
 		Use:   "git-profile-manager",
 		Short: "Allows to add and switch between multiple user profiles in your git repositories",
 		Long: `Git Profile Manager allows to add and switch between multiple

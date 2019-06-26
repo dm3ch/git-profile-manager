@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var addCmd = &cobra.Command{
+var addCmd = &cobra.Command{ //nolint:gochecknoglobals
 	Use:     "add [profile] [key] [value]",
 	Aliases: []string{"set"},
 	Short:   "Add an entry to a profile",

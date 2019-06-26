@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var delCmd = &cobra.Command{
+var delCmd = &cobra.Command{ //nolint:gochecknoglobals
 	Use:     "del [profile] [key]",
 	Aliases: []string{"rm"},
 	Short:   "Delete an entry or a profile",

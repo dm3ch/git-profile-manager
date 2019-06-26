@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var listCmd = &cobra.Command{
+var listCmd = &cobra.Command{ //nolint:gochecknoglobals
 	Use:     "list",
 	Aliases: []string{"l"},
 	Short:   "List of profiles",

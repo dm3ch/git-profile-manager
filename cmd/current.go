@@ -10,7 +10,7 @@ import (
 // DefaultProfileName is a default profile name if not selected
 const DefaultProfileName = `default`
 
-var currentCmd = &cobra.Command{
+var currentCmd = &cobra.Command{ //nolint:gochecknoglobals
 	Use:     "current",
 	Aliases: []string{"c"},
 	Short:   "Show selected profile",
