@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"path"
 
 	"github.com/spf13/cobra"
 )
@@ -23,10 +22,8 @@ var removeCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		path := path.Join(configDir, profileName+".profile")
-		_, err = os.Stat(path)
-		profileExists := !os.IsNotExist(err)
-
+		path := getProfilePath(configDir, profileName)
+		profileExists := isFileExist(path)
 		if !profileExists {
 			fmt.Printf("Profile %s does not exists\n", profileName)
 			return

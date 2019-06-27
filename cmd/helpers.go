@@ -4,10 +4,15 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/dm3ch/git-profile-manager/profile"
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
+)
+
+const (
+	profileExtention = "profile"
 )
 
 // Create directory if it doesn't exists
@@ -37,7 +42,7 @@ func prompt(label string) string {
 	fmt.Printf("%s: ", label)
 	str, err := reader.ReadString('\n')
 	if err != nil {
-		fmt.Println("Prompt failed")
+		fmt.Println("Prompt failed:")
 		fmt.Println(err)
 		os.Exit(1)
 	}
@@ -55,4 +60,15 @@ func promptGitUser(user *profile.GitUser) {
 func promptYesNo(label string) bool {
 	answer := prompt(label + " [y/N]")
 	return (answer == "y" || answer == "Y")
+}
+
+// Get profile file path
+func getProfilePath(configDir, profileName string) string {
+	return filepath.Join(configDir, profileName+"."+profileExtention)
+}
+
+// Check if file exists
+func isFileExist(path string) bool {
+	_, err := os.Stat(path)
+	return !os.IsNotExist(err)
 }

@@ -28,7 +28,7 @@ user profiles in your git configurations`,
 
 		err = CreateDirIfNotExist(configDir)
 		if err != nil {
-			fmt.Println("Can't create config directory")
+			fmt.Println("Can't create config directory:")
 			fmt.Println(err)
 			os.Exit(1)
 		}

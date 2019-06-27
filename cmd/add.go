@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"path"
 
 	"github.com/dm3ch/git-profile-manager/profile"
 
@@ -33,9 +32,8 @@ var addCmd = &cobra.Command{
 			promptGitUser(&profile.User)
 		}
 
-		path := path.Join(configDir, profile.Name+".profile")
-		_, err = os.Stat(path)
-		profileExists := !os.IsNotExist(err)
+		path := getProfilePath(configDir, profile.Name)
+		profileExists := isFileExist(path)
 
 		if profileExists && !force {
 			force = promptYesNo(fmt.Sprintf("Override existing %s profile", profile.Name))
