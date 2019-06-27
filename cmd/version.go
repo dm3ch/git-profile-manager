@@ -7,7 +7,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-//nolint:gochecknoglobals
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print tool version",
@@ -18,7 +17,6 @@ var versionCmd = &cobra.Command{
 	},
 }
 
-//nolint:gochecknoinits
 func init() {
 	rootCmd.AddCommand(versionCmd)
 }
