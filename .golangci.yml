@@ -43,3 +43,5 @@ issues:
       linters:
       - gochecknoglobals
       - gochecknoinits
+    - path: editor/
+      text: ".*"
