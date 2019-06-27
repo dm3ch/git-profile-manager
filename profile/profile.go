@@ -15,7 +15,7 @@ type Profile struct {
 	User GitUser `ini:"-"`
 }
 
-func (profile *Profile) Save(path string, force bool) error {
+func (profile *Profile) Save(path string) error {
 	cfg := ini.Empty()
 
 	profileSection, err := cfg.NewSection("profile")
