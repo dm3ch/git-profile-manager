@@ -16,8 +16,7 @@ const (
 var rootCmd = &cobra.Command{
 	Use:   "git-profile-manager",
 	Short: "Allows to manage and switch between multiple git profiles",
-	Long: `Git Profile Manager allows to manage and switch between multiple
-user profiles in your git configurations`,
+	Long:  "Git Profile Manager allows to manage and switch between multiple user profiles in your git configurations",
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		configDir, err := GetConfigDirAbsolutePath()
 		if err != nil {
