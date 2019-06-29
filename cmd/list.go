@@ -12,7 +12,7 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List git profiles",
 	Run: func(cmd *cobra.Command, args []string) {
-		configDir, err := GetConfigDirAbsolutePath()
+		configDir, err := getConfigDirAbsolutePath()
 		if err != nil {
 			fmt.Println("Can't get configuration directory absolute path:")
 			fmt.Println(err)

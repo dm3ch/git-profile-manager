@@ -15,7 +15,7 @@ var removeCmd = &cobra.Command{
 		profileName := args[0]
 		force, _ := cmd.Flags().GetBool("force")
 
-		configDir, err := GetConfigDirAbsolutePath()
+		configDir, err := getConfigDirAbsolutePath()
 		if err != nil {
 			fmt.Println("Can't get configuration directory absolute path:")
 			fmt.Println(err)

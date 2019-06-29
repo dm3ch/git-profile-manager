@@ -15,7 +15,7 @@ var showCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		profileName := args[0]
 
-		configDir, err := GetConfigDirAbsolutePath()
+		configDir, err := getConfigDirAbsolutePath()
 		if err != nil {
 			fmt.Println("Can't get configuration directory absolute path:")
 			fmt.Println(err)

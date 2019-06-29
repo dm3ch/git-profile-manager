@@ -5,9 +5,9 @@ import (
 )
 
 type GitUser struct {
-	Name       string `ini:"name,omitempty"`
-	Email      string `ini:"email,omitempty"`
-	SigningKey string `ini:"signingkey,omitempty"`
+	Name       string `ini:"name"`
+	Email      string `ini:"email"`
+	SigningKey string `ini:"signingkey"`
 }
 
 type Profile struct {
@@ -38,6 +38,5 @@ func (profile *Profile) Save(path string) error {
 		return err
 	}
 
-	err = cfg.SaveTo(path)
-	return err
+	return cfg.SaveTo(path)
 }

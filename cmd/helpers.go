@@ -16,7 +16,7 @@ const (
 )
 
 // Create directory if it doesn't exists
-func CreateDirIfNotExist(dir string) error {
+func createDirIfNotExist(dir string) error {
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		err = os.MkdirAll(dir, 0755)
 		return err
@@ -25,10 +25,14 @@ func CreateDirIfNotExist(dir string) error {
 	return nil
 }
 
-// Get configuration directory
-func GetConfigDirAbsolutePath() (string, error) {
-	configDir := viper.GetString("configDir")
-	configDir, err := homedir.Expand(configDir)
+// Get configuration directory relative path
+func getConfigDirRelativePath() string {
+	return viper.GetString("configDir")
+}
+
+// Get configuration directory absolute path
+func getConfigDirAbsolutePath() (string, error) {
+	configDir, err := homedir.Expand(getConfigDirRelativePath())
 	if err != nil {
 		return "", err
 	}

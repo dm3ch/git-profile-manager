@@ -18,14 +18,14 @@ var rootCmd = &cobra.Command{
 	Short: "Allows to manage and switch between multiple git profiles",
 	Long:  "Git Profile Manager allows to manage and switch between multiple user profiles in your git configurations",
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		configDir, err := GetConfigDirAbsolutePath()
+		configDir, err := getConfigDirAbsolutePath()
 		if err != nil {
 			fmt.Println("Can't get configuration directory absolute path:")
 			fmt.Println(err)
 			os.Exit(1)
 		}
 
-		err = CreateDirIfNotExist(configDir)
+		err = createDirIfNotExist(configDir)
 		if err != nil {
 			fmt.Println("Can't create config directory:")
 			fmt.Println(err)
