@@ -5,7 +5,7 @@ import (
 )
 
 func loadConfig(path string) (*ini.File, error) {
-	cfg, err := ini.Load(path)
+	cfg, err := ini.ShadowLoad(path)
 	return cfg, err
 }
 

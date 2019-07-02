@@ -8,6 +8,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
+type include struct {
+	Paths []string `ini:"path,omitempty,allowshadow"`
+}
+
 var useCmd = &cobra.Command{
 	Use:   "use [profile name]",
 	Short: "Use specified profile for current repo",
@@ -30,14 +34,50 @@ var useCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		section, err := gitConfig.NewSection("include")
+		incSection, err := gitConfig.NewSection("include")
 		if err != nil {
 			fmt.Println("Can't get profile section:")
 			fmt.Println(err)
 			os.Exit(1)
 		}
 
-		section.NewKey("path", path)
+		inc := new(include)
+		err = incSection.MapTo(inc)
+		if err != nil {
+			fmt.Println("Can't map include section:")
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		// inc.Paths = append(inc.Paths[:1], inc.Paths[1+1:]...)
+
+		err = incSection.ReflectFrom(inc)
+		if err != nil {
+			fmt.Println("Can't reflect include section:")
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		// _, err = section.NewKey("path", path)
+		// if err != nil {
+		// 	fmt.Println("Can't set include.path key:")
+		// 	fmt.Println(err)
+		// 	os.Exit(1)
+		// }
+
+		// section, err = gitConfig.NewSection("profile")
+		// if err != nil {
+		// 	fmt.Println("Can't get profile section:")
+		// 	fmt.Println(err)
+		// 	os.Exit(1)
+		// }
+
+		// key, err := section.Key("path", path)
+		// if err != nil {
+		// 	fmt.Println("Can't set include.path key:")
+		// 	fmt.Println(err)
+		// 	os.Exit(1)
+		// }
 
 		gitconfig.SaveLocalConfig(gitConfig)
 	},
