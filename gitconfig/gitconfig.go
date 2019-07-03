@@ -1,50 +1,51 @@
 package gitconfig
 
 import (
-	"github.com/go-ini/ini"
+	"errors"
+	"os/exec"
 )
 
-func loadConfig(path string) (*ini.File, error) {
-	cfg, err := ini.ShadowLoad(path)
-	return cfg, err
+type ConfigType int
+
+const (
+	LocalConfig ConfigType = iota
+	GlobalConfig
+	SystemConfig
+)
+
+func GitExec(command ...string) (string, error) {
+	out, err := exec.Command("git", command...).CombinedOutput()
+	return string(out), err
 }
 
-func saveConfig(cfg *ini.File, path string) error {
-	return cfg.SaveTo(path)
-}
-
-func LoadLocalConfig() (*ini.File, error) {
-	path, err := getLocalConfigPath()
-	if err != nil {
-		return nil, err
+func Exec(configType ConfigType, command ...string) (string, error) {
+	var args []string
+	switch configType {
+	case LocalConfig:
+		args = append([]string{"config", "--local"}, command...)
+	case GlobalConfig:
+		args = append([]string{"config", "--global"}, command...)
+	case SystemConfig:
+		args = append([]string{"config", "--system"}, command...)
+	default:
+		return "", errors.New("can't recognize ConfigType")
 	}
 
-	return loadConfig(path)
+	return GitExec(args...)
 }
 
-func SaveLocalConfig(cfg *ini.File) error {
-	path, err := getLocalConfigPath()
-	if err != nil {
-		return err
-	}
-
-	return saveConfig(cfg, path)
+func ReplaceAll(configType ConfigType, key, value string) (string, error) {
+	return Exec(configType, "--replace-all", key, value)
 }
 
-func LoadGlobalConfig() (*ini.File, error) {
-	path, err := getGlobalConfigPath()
-	if err != nil {
-		return nil, err
-	}
-
-	return loadConfig(path)
+func Add(configType ConfigType, key, value string) (string, error) {
+	return Exec(configType, "--add", key, value)
 }
 
-func SaveGlobalConfig(cfg *ini.File) error {
-	path, err := getGlobalConfigPath()
-	if err != nil {
-		return err
-	}
+func UnsetAll(configType ConfigType, key, value string) (string, error) {
+	return Exec(configType, "--unset-all", key, value)
+}
 
-	return saveConfig(cfg, path)
+func Get(configType ConfigType, key string) (string, error) {
+	return Exec(configType, "--get", key)
 }

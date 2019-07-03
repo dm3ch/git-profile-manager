@@ -13,7 +13,6 @@ import (
 
 const (
 	profileExtention = "profile"
-	profileComment   = "git-profile-manager: Do not remove"
 )
 
 // Create directory if it doesn't exists
