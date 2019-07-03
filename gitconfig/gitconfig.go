@@ -43,7 +43,10 @@ func Add(configType ConfigType, key, value string) (string, error) {
 }
 
 func UnsetAll(configType ConfigType, key, value string) (string, error) {
-	return Exec(configType, "--unset-all", key, value)
+	if value != "" {
+		return Exec(configType, "--unset-all", key, value)
+	}
+	return Exec(configType, "--unset-all", key)
 }
 
 func Get(configType ConfigType, key string) (string, error) {
