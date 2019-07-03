@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"os"
 
@@ -11,10 +12,24 @@ import (
 var useCmd = &cobra.Command{
 	Use:   "use [profile name]",
 	Short: "Use specified profile for current repo",
-	Args:  cobra.ExactArgs(1),
+	Args: func(cmd *cobra.Command, args []string) error {
+		unset, _ := cmd.Flags().GetBool("unset")
+
+		if unset {
+			if len(args) != 0 {
+				return errors.New("no arguments required to unset profile")
+			}
+		} else {
+			if len(args) != 1 {
+				return errors.New("reqired exact 1 argument that contains profile name")
+			}
+		}
+
+		return nil
+	},
 	Run: func(cmd *cobra.Command, args []string) {
-		profileName := args[0]
 		global, _ := cmd.Flags().GetBool("global")
+		unset, _ := cmd.Flags().GetBool("unset")
 
 		var configType gitconfig.ConfigType
 		if global {
@@ -25,11 +40,17 @@ var useCmd = &cobra.Command{
 
 		configDir := getConfigDirRelativePath()
 
-		path := getProfilePath(configDir, profileName)
-		profileExists := isFileExist(path)
-		if !profileExists {
-			fmt.Printf("Profile %s does not exists\n", profileName)
-			os.Exit(1)
+		var profileName, path string
+		var profileExists bool
+
+		if !unset {
+			profileName = args[0]
+			path = getProfilePath(configDir, profileName)
+			profileExists = isFileExist(path)
+			if !profileExists {
+				fmt.Printf("Profile %s does not exists\n", profileName)
+				os.Exit(1)
+			}
 		}
 
 		out, err := gitconfig.Get(configType, "profile.path")
@@ -42,18 +63,20 @@ var useCmd = &cobra.Command{
 			}
 		}
 
-		out, err = gitconfig.Add(configType, "include.path", path)
-		if err != nil {
-			fmt.Printf("git config command error:\n Output: %s\n", out)
-			fmt.Println(err)
-			os.Exit(1)
-		}
+		if !unset {
+			out, err = gitconfig.Add(configType, "include.path", path)
+			if err != nil {
+				fmt.Printf("git config command error:\n Output: %s\n", out)
+				fmt.Println(err)
+				os.Exit(1)
+			}
 
-		out, err = gitconfig.ReplaceAll(configType, "profile.path", path)
-		if err != nil {
-			fmt.Printf("git config command error:\n Output: %s\n", out)
-			fmt.Println(err)
-			os.Exit(1)
+			out, err = gitconfig.ReplaceAll(configType, "profile.path", path)
+			if err != nil {
+				fmt.Printf("git config command error:\n Output: %s\n", out)
+				fmt.Println(err)
+				os.Exit(1)
+			}
 		}
 	},
 }
@@ -61,4 +84,5 @@ var useCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(useCmd)
 	useCmd.Flags().BoolP("global", "g", false, "Set profile for global config")
+	useCmd.Flags().BoolP("unset", "u", false, "Just unset currently used profile")
 }
