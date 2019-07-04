@@ -73,6 +73,7 @@ func getProfilePath(configDir, profileName string) string {
 
 // Check if file exists
 func isFileExist(path string) bool {
-	_, err := os.Stat(path)
+	absolutePath, _ := homedir.Expand(path)
+	_, err := os.Stat(absolutePath)
 	return !os.IsNotExist(err)
 }
