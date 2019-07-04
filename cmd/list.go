@@ -9,8 +9,9 @@ import (
 )
 
 var listCmd = &cobra.Command{
-	Use:   "list",
-	Short: "List git profiles",
+	Use:     "list",
+	Short:   "List git profiles",
+	Aliases: []string{"ls"},
 	Run: func(cmd *cobra.Command, args []string) {
 		configDir, err := getConfigDirAbsolutePath()
 		if err != nil {
