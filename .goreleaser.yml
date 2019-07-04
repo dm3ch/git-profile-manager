@@ -44,9 +44,11 @@ brews:
   test: |
     system "#{bin}/git-profile-manager", "--version"
   install: |
-    bin.install "git-profile-manager"
-
     system "#{bin}/git-profile-manager completion bash > bash_completion.bash"
     system "#{bin}/git-profile-manager completion zsh > zsh_completion.zsh"
     bash_completion.install "bash_completion.bash"
     zsh_completion.install "zsh_completion.zsh"
+
+    ln_s "#{bin}/git-profile-manager", "#{bin}/git-profile", false
+    bin.install "git-profile-manager"
+    bin.install "git-profile"
