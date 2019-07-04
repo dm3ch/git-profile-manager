@@ -1,4 +1,4 @@
-# Git Profile switcher
+# Git Profile Manager
 
 [![CircleCI](https://circleci.com/gh/Dm3Ch/git-profile-manager.svg?style=svg)](https://circleci.com/gh/Dm3Ch/git-profile-manager)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Dm3Ch/git-profile)](https://goreportcard.com/report/github.com/Dm3Ch/git-profile-manager)
