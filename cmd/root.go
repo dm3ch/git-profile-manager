@@ -1,70 +1,50 @@
 package cmd
 
 import (
-	"log"
+	"fmt"
 	"os"
 
-	"github.com/dm3ch/git-profile-manager/config"
-	"github.com/hashicorp/logutils"
-	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
-var (
-	cfgStorage *config.Config //nolint:gochecknoglobals
-	cfgFile    string         //nolint:gochecknoglobals
-	isDebug    bool           //nolint:gochecknoglobals
-
-	rootCmd = &cobra.Command{ //nolint:gochecknoglobals
-		Use:   "git-profile-manager",
-		Short: "Allows to add and switch between multiple user profiles in your git repositories",
-		Long: `Git Profile Manager allows to add and switch between multiple
-user profiles in your git repositories.`,
-	}
+const (
+	defaultConfigDir = "~/.git-profile-manager"
+	envConfigDir     = "GPM_CONFIG_DIR"
 )
 
-func Init() {
-	cobra.OnInitialize(initLogs, initConfig)
-	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "~/.gitprofile", "config file")
-	rootCmd.PersistentFlags().BoolVarP(&isDebug, "debug", "d", false, "show debug log")
+var rootCmd = &cobra.Command{
+	Use:   "git-profile-manager",
+	Short: "Allows to manage and switch between multiple git profiles",
+	Long:  "Git Profile Manager allows to manage and switch between multiple user profiles in your git configurations",
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		configDir, err := getConfigDirAbsolutePath()
+		if err != nil {
+			fmt.Println("Can't get configuration directory absolute path:")
+			fmt.Println(err)
+			os.Exit(1)
+		}
 
-	rootCmd.AddCommand(addCmd)
-	rootCmd.AddCommand(currentCmd)
-	rootCmd.AddCommand(listCmd)
-	rootCmd.AddCommand(delCmd)
-	rootCmd.AddCommand(useCmd)
-	rootCmd.AddCommand(versionCmd)
+		err = createDirIfNotExist(configDir)
+		if err != nil {
+			fmt.Println("Can't create config directory:")
+			fmt.Println(err)
+			os.Exit(1)
+		}
+	},
 }
 
-// Execute executes the root command.
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 		os.Exit(1)
 	}
 }
 
-func initLogs() {
-	filter := &logutils.LevelFilter{
-		Levels:   []logutils.LogLevel{"DEBUG", "WARN", "ERROR"},
-		MinLevel: logutils.LogLevel("WARN"),
-		Writer:   os.Stderr,
-	}
-
-	if isDebug {
-		filter.MinLevel = logutils.LogLevel("DEBUG")
-	}
-
-	log.SetOutput(filter)
-}
-
-func initConfig() {
-	cfgFile, _ = homedir.Expand(cfgFile)
-	cfgStorage = config.NewConfig()
-
-	err := cfgStorage.Load(cfgFile)
-	if err != nil {
-		log.Println("[ERROR] Cannot load json from", cfgFile, err)
-		os.Exit(1)
-	}
+func init() {
+	rootCmd.PersistentFlags().StringP("configDir", "C", defaultConfigDir,
+		fmt.Sprintf("Configuration directory (Could be also set via %s environment variable)", envConfigDir))
+	_ = viper.BindPFlag("configDir", rootCmd.PersistentFlags().Lookup("configDir"))
+	_ = viper.BindEnv("configDir", envConfigDir)
+	viper.SetDefault("configDir", defaultConfigDir)
 }

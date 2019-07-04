@@ -1,17 +1,22 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/dm3ch/git-profile-manager/version"
 	"github.com/spf13/cobra"
 )
 
-var versionCmd = &cobra.Command{ //nolint:gochecknoglobals
+var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Print the version number of Git Profile",
+	Short: "Print version",
 	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Println("Git Profile")
-		cmd.Println("Version:", version.VersionNumber)
-		cmd.Println("Commit hash:", version.VersionCommitHash)
-		cmd.Println("Build date:", version.VersionBuildDate)
+		fmt.Println("Version:", version.VersionNumber)
+		fmt.Println("Commit hash:", version.VersionCommitHash)
+		fmt.Println("Build date:", version.VersionBuildDate)
 	},
+}
+
+func init() {
+	rootCmd.AddCommand(versionCmd)
 }

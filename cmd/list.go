@@ -1,34 +1,40 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
 )
 
-var listCmd = &cobra.Command{ //nolint:gochecknoglobals
-	Use:     "list",
-	Aliases: []string{"l"},
-	Short:   "List of profiles",
-	Long:    "Displays a list of available profiles.",
-	Run:     listRun,
+var listCmd = &cobra.Command{
+	Use:   "list",
+	Short: "List git profiles",
+	Run: func(cmd *cobra.Command, args []string) {
+		configDir, err := getConfigDirAbsolutePath()
+		if err != nil {
+			fmt.Println("Can't get configuration directory absolute path:")
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		profiles, err := filepath.Glob(getProfilePath(configDir, "*"))
+		if err != nil {
+			fmt.Println("Can't list profiles:")
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		fmt.Println("Existing profiles:")
+		for _, profile := range profiles {
+			profileName := filepath.Base(profile)
+			profileName = profileName[:len(profileName)-len(profileExtention)-1]
+			fmt.Println(profileName)
+		}
+	},
 }
 
-func listRun(cmd *cobra.Command, args []string) {
-	if len(cfgStorage.Profiles) == 0 {
-		cmd.Print(`There are no available profiles.
-To add a profile, use the following examples:
-  git-profile add my-profile user.name "John Doe"
-  git-profile add my-profile user.email work@example.com`)
-		os.Exit(0)
-	}
-
-	cmd.Print("Available profiles:\n\n")
-	for title := range cfgStorage.Profiles {
-		cmd.Printf("[%s]\n", title)
-		entries, _ := cfgStorage.GetProfile(title)
-		for _, entry := range entries {
-			cmd.Printf("\t%s = %s\n", entry.Key, entry.Value)
-		}
-	}
+func init() {
+	rootCmd.AddCommand(listCmd)
 }

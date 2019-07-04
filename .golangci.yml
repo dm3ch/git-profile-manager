@@ -18,10 +18,6 @@ linters-settings:
     min-complexity: 10
   maligned:
     suggest-new: true
-  depguard:
-    list-type: blacklist
-    packages:
-      - github.com/dotzero/git-profile
   misspell:
     locale: US
     # ignore-words:
@@ -39,3 +35,13 @@ linters:
   disable:
   - maligned
   - prealloc
+  - depguard
+
+issues:
+  exclude-rules:
+    - path: cmd/
+      linters:
+      - gochecknoglobals
+      - gochecknoinits
+    - path: editor/
+      text: ".*"

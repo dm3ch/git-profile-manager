@@ -21,13 +21,21 @@ source <(git-profile-manager completion zsh)`,
 	// DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {
 		shell := args[0]
+
+		var err error = nil
 		switch shell {
 		case "bash":
-			rootCmd.GenBashCompletion(os.Stdout)
+			err = rootCmd.GenBashCompletion(os.Stdout)
 		case "zsh":
-			rootCmd.GenZshCompletion(os.Stdout)
+			err = rootCmd.GenZshCompletion(os.Stdout)
 		default:
 			fmt.Printf("Completion for %s shell is not supported", shell)
+		}
+
+		if err != nil {
+			fmt.Println("Got error while completion generation:")
+			fmt.Println(err)
+			os.Exit(1)
 		}
 	},
 }
