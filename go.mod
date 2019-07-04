@@ -1,9 +1,13 @@
 module github.com/dm3ch/git-profile-manager
 
+go 1.12
+
 require (
+	github.com/dm3ch/go-editor v0.0.0-20190704211510-6da832799a42
 	github.com/go-ini/ini v1.42.0
 	github.com/mitchellh/go-homedir v1.1.0
+	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/viper v1.4.0
-	k8s.io/kubectl v0.0.0-20190703213622-335bcc0cc08d
+	gopkg.in/ini.v1 v1.42.0 // indirect
 )

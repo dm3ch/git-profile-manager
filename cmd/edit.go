@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dm3ch/git-profile-manager/editor"
+	editor "github.com/dm3ch/go-editor"
 	"github.com/spf13/cobra"
 )
 
@@ -29,7 +29,7 @@ var editCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		err = editor.NewDefaultEditor(nil).Launch(path)
+		err = editor.RunEditor(path)
 		if err != nil {
 			fmt.Printf("Error while editing profile %s file:\n", profileName)
 			fmt.Println(err)
