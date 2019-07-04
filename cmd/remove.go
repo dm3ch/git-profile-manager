@@ -8,11 +8,11 @@ import (
 )
 
 var removeCmd = &cobra.Command{
-	Use:   "remove [profile name]",
-	Short: "Remove git profile",
-	Args:  cobra.ExactArgs(1),
+	Use:     "remove [profile name] ([profile name]...)",
+	Short:   "Remove git profile",
+	Aliases: []string{"rm"},
+	Args:    cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		profileName := args[0]
 		force, _ := cmd.Flags().GetBool("force")
 
 		configDir, err := getConfigDirAbsolutePath()
@@ -22,29 +22,34 @@ var removeCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		path := getProfilePath(configDir, profileName)
-		profileExists := isFileExist(path)
-		if !profileExists {
-			fmt.Printf("Profile %s does not exists\n", profileName)
-			return
-		}
+		for i := 0; i < len(args); i++ {
+			profileName := args[i]
 
-		if !force {
-			force = promptYesNo(fmt.Sprintf("Remove %s profile", profileName))
-		}
-
-		if force {
-			err = os.Remove(path)
-
-			if err != nil {
-				fmt.Printf("Profile %s remove failed:\n", profileName)
-				fmt.Println(err)
-				os.Exit(1)
-			} else {
-				fmt.Printf("Profile %s removed successfully\n", profileName)
+			path := getProfilePath(configDir, profileName)
+			profileExists := isFileExist(path)
+			if !profileExists {
+				fmt.Printf("Profile %s does not exists\n", profileName)
+				return
 			}
-		} else {
-			fmt.Printf("Profile %s wasn't removed\n", profileName)
+
+			yes := force
+			if !force {
+				yes = promptYesNo(fmt.Sprintf("Remove %s profile", profileName))
+			}
+
+			if yes {
+				err = os.Remove(path)
+
+				if err != nil {
+					fmt.Printf("Profile %s remove failed:\n", profileName)
+					fmt.Println(err)
+					os.Exit(1)
+				} else {
+					fmt.Printf("Profile %s removed successfully\n", profileName)
+				}
+			} else {
+				fmt.Printf("Profile %s wasn't removed\n", profileName)
+			}
 		}
 	},
 }
