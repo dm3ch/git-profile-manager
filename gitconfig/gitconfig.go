@@ -11,6 +11,7 @@ const (
 	LocalConfig ConfigType = iota
 	GlobalConfig
 	SystemConfig
+	MergedConfig
 )
 
 func GitExec(command ...string) (string, error) {
@@ -27,6 +28,8 @@ func Exec(configType ConfigType, command ...string) (string, error) {
 		args = append([]string{"config", "--global"}, command...)
 	case SystemConfig:
 		args = append([]string{"config", "--system"}, command...)
+	case MergedConfig:
+		args = append([]string{"config"}, command...)
 	default:
 		return "", errors.New("can't recognize ConfigType")
 	}
