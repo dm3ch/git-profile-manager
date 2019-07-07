@@ -49,7 +49,7 @@ var useCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		if dir[len(dir)-1] != '/' {
+		if dir != "" && dir[len(dir)-1] != '/' {
 			dir += "/"
 		}
 
