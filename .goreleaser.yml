@@ -35,10 +35,10 @@ brews:
     email: dm3ch+ci@dm3ch.net
   folder: Formula
   caveats: "git-profile-manager --help"
-  homepage: "https://github.com/Dm3Ch/git-profile-manager"
+  homepage: "https://github.com/dm3ch/git-profile-manager"
   description: "Allows to manage and switch between multiple git profiles"
   custom_block: |
-    head "https://github.com/Dm3Ch/git-profile-manager.git"
+    head "https://github.com/dm3ch/git-profile-manager.git"
   dependencies:
     - git
   test: |
