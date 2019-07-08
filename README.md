@@ -1,7 +1,7 @@
 # Git Profile Manager
 
 [![CircleCI](https://circleci.com/gh/dm3ch/git-profile-manager.svg?style=svg)](https://circleci.com/gh/dm3ch/git-profile-manager)
-[![Go Report Card](https://goreportcard.com/badge/github.com/dm3ch/git-profile)](https://goreportcard.com/report/github.com/dm3ch/git-profile-manager)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dm3ch/git-profile-manager)](https://goreportcard.com/report/github.com/dm3ch/git-profile-manager)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dm3ch/git-profile-manager/blob/master/LICENSE)
 
 Git Profile allows to add and switch between multiple user profiles in your git repositories.
