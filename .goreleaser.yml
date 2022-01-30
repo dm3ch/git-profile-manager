@@ -12,6 +12,9 @@ builds:
     - linux
     - windows
 
+universal_binaries:
+  - replace: true
+
 archives:
 - replacements:
     darwin: MacOS
