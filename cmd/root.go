@@ -44,6 +44,7 @@ func Execute() {
 func init() {
 	rootCmd.PersistentFlags().StringP("configDir", "C", defaultConfigDir,
 		fmt.Sprintf("Configuration directory (Could be also set via %s environment variable)", envConfigDir))
+
 	_ = viper.BindPFlag("configDir", rootCmd.PersistentFlags().Lookup("configDir"))
 	_ = viper.BindEnv("configDir", envConfigDir)
 	viper.SetDefault("configDir", defaultConfigDir)

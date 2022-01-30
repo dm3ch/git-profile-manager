@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"github.com/dm3ch/git-profile-manager/profile"
-
 	"github.com/spf13/cobra"
 )
 

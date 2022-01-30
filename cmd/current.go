@@ -34,10 +34,11 @@ func getConfigValue(key string) string {
 	if err != nil {
 		return ""
 	}
+
 	return out[:len(out)-1]
 }
 
-//nolint:gocyclo
+//nolint: gocyclo, gocognit, cyclop, gocritic
 func templateRender(tpl string) string {
 	phStartPos := -1
 	phEndPos := 0
@@ -45,34 +46,39 @@ func templateRender(tpl string) string {
 	keyEndPos := -1
 	result := ""
 
-	for i := 0; i < len(tpl); i++ {
-		if i != 0 && tpl[i] == '{' && tpl[i-1] == '{' {
-			phStartPos = i - 1
+	for index := 0; index < len(tpl); index++ {
+		if index != 0 && tpl[index] == '{' && tpl[index-1] == '{' {
+			phStartPos = index - 1
+
 			continue
 		}
 
-		if phStartPos != -1 && keyStartPos == -1 && tpl[i] != ' ' {
-			keyStartPos = i
+		if phStartPos != -1 && keyStartPos == -1 && tpl[index] != ' ' {
+			keyStartPos = index
 		}
 
-		if keyStartPos != -1 && keyEndPos == -1 && tpl[i] == ' ' {
-			keyEndPos = i
+		if keyStartPos != -1 && keyEndPos == -1 && tpl[index] == ' ' {
+			keyEndPos = index
 		}
 
-		if i != 0 && tpl[i] == '}' && tpl[i-1] == '}' {
+		if index != 0 && tpl[index] == '}' && tpl[index-1] == '}' {
 			if phStartPos != -1 {
 				result += tpl[phEndPos:phStartPos]
+
 				if keyEndPos == -1 {
-					keyEndPos = i - 1
+					keyEndPos = index - 1
 				}
+
 				result += getConfigValue(tpl[keyStartPos:keyEndPos])
-				phEndPos = i + 1
+				phEndPos = index + 1
 				phStartPos = -1
 				keyStartPos = -1
 				keyEndPos = -1
 			}
 		}
 	}
+
 	result += tpl[phEndPos:]
+
 	return result
 }

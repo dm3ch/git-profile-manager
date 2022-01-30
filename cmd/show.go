@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -37,7 +37,7 @@ var showCmd = &cobra.Command{
 		}
 		defer file.Close()
 
-		buffer, err := ioutil.ReadAll(file)
+		buffer, err := io.ReadAll(file)
 		if err != nil {
 			file.Close()
 			fmt.Printf("Can't read profile %s file:\n", profileName)

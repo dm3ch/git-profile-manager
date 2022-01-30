@@ -12,8 +12,6 @@ linters-settings:
           - (github.com/golangci/golangci-lint/pkg/logutils.Log).Warnf
           - (github.com/golangci/golangci-lint/pkg/logutils.Log).Errorf
           - (github.com/golangci/golangci-lint/pkg/logutils.Log).Fatalf
-  golint:
-    min-confidence: 0
   gocyclo:
     min-complexity: 10
   maligned:
@@ -36,6 +34,10 @@ linters:
   - maligned
   - prealloc
   - depguard
+  - wrapcheck # Requires wrapping external Errors to new ones
+  - forbidigo # Restricts using of fmt.Println
+  - goerr113  # Requires rewriting of most of errors to static ones in cmd/usage.go
+  - exhaustivestruct # Reports errors in Cobra structs
 
 issues:
   exclude-rules:

@@ -29,6 +29,7 @@ var removeCmd = &cobra.Command{
 			profileExists := isFileExist(path)
 			if !profileExists {
 				fmt.Printf("Profile %s does not exists\n", profileName)
+
 				return
 			}
 

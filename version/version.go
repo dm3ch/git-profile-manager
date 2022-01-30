@@ -1,9 +1,8 @@
 package version
 
+//nolint:gochecknoglobals // These variables should be set by the linker during build.
 var (
-	// These variables should be set by the linker during build
-
-	VersionNumber     = "Unknown" //nolint:gochecknoglobals
-	VersionCommitHash = "Unknown" //nolint:gochecknoglobals
-	VersionBuildDate  = "Unknown" //nolint:gochecknoglobals
+	VersionNumber     = "Unknown"
+	VersionCommitHash = "Unknown"
+	VersionBuildDate  = "Unknown"
 )

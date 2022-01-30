@@ -16,11 +16,13 @@ const (
 
 func GitExec(command ...string) (string, error) {
 	out, err := exec.Command("git", command...).CombinedOutput()
+
 	return string(out), err
 }
 
 func Exec(configType ConfigType, command ...string) (string, error) {
 	var args []string
+
 	switch configType {
 	case LocalConfig:
 		args = append([]string{"config", "--local"}, command...)
@@ -49,6 +51,7 @@ func UnsetAll(configType ConfigType, key, value string) (string, error) {
 	if value != "" {
 		return Exec(configType, "--unset-all", key, value)
 	}
+
 	return Exec(configType, "--unset-all", key)
 }
 
