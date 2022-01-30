@@ -109,10 +109,12 @@ func unsetProfile(configType gitconfig.ConfigType, unsetProfilePath bool, key, v
 }
 
 func unsetProfileWrapper(incType includeType, dir string) error {
-	var key, value string
-	var unsetProfilePath bool
-	var err error
-	var configType gitconfig.ConfigType
+	var (
+		key, value       string
+		unsetProfilePath bool
+		err              error
+		configType       gitconfig.ConfigType
+	)
 
 	switch incType {
 	case dirInclude:
@@ -125,18 +127,22 @@ func unsetProfileWrapper(incType includeType, dir string) error {
 		unsetProfilePath = true
 		key = gitIncludePath
 		value, err = gitconfig.Get(configType, gitProfilePath)
+
 		if err != nil || value == "" {
-			return nil
+			return fmt.Errorf("failed to detect profile value during unset")
 		}
+
 		value = value[:len(value)-1]
 	case localInclude:
 		configType = gitconfig.LocalConfig
 		unsetProfilePath = true
 		key = gitIncludePath
 		value, err = gitconfig.Get(configType, gitProfilePath)
+
 		if err != nil || value == "" {
-			return nil
+			return fmt.Errorf("failed to detect profile value during unset")
 		}
+
 		value = value[:len(value)-1]
 	}
 
@@ -160,9 +166,11 @@ func setProfile(configType gitconfig.ConfigType, setProfilePath bool, key, value
 }
 
 func setProfileWrapper(incType includeType, dir, profilePath string) error {
-	var key string
-	var setProfilePath bool
-	var configType gitconfig.ConfigType
+	var (
+		key            string
+		setProfilePath bool
+		configType     gitconfig.ConfigType
+	)
 
 	switch incType {
 	case dirInclude:
